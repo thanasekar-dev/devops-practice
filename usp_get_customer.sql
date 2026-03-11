@@ -3,7 +3,8 @@
 CREATE PROCEDURE usp_get_customer
 AS
 BEGIN
-    SELECT * FROM Customers
+    SELECT Id,Cust_name FROM Customers
 END
+
 
 
