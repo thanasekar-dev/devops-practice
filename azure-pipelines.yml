@@ -1,18 +1,13 @@
-name: Deploy SQL Procedure
+trigger:
+- main
 
-on:
-  push:
-    branches:
-      - main
+pool:
+  name: Default
 
-jobs:
-  deploy:
-    runs-on: self-hosted
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Run SQL Script
-        run: |
-          sqlcmd -S THANASEKAR -E -d master -i usp_get_customer.sql
+steps:
+- task: PowerShell@2
+  displayName: 'Deploy Stored Procedure'
+  inputs:
+    targetType: 'inline'
+    script: |
+      sqlcmd -S THANASEKAR -d AdventureWorks2022 -E -i procedures/uspGetBillOfMaterials.sql
