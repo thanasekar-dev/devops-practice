@@ -1,0 +1,18 @@
+name: Deploy SQL Procedure
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run SQL Script
+        run: |
+          sqlcmd -S THANASEKAR -E -d master -i usp_get_customer.sql
